@@ -8,12 +8,13 @@ import setting as setting
 
 
 def get_twitch_access_token():
-    r = requests.post('https://id.twitch.tv/oauth2/token?client_id=' + setting.client_id + '&client_secret=' + setting.client_secret + '&grant_type=client_credentials')
-    json_str = json.loads(r.content)
-    return json_str['access_token']
-
-access_token = get_twitch_access_token()
-
+    try:
+        r = requests.post('https://id.twitch.tv/oauth2/token?client_id=' + setting.client_id + '&client_secret=' + setting.client_secret + '&grant_type=client_credentials')
+        json_str = json.loads(r.content)
+        return json_str['access_token']
+    except Exception as e:
+        print(e)
+        return None
 
 def get_all_games_from_db():
     games_tmp = []
@@ -92,9 +93,14 @@ def save_image_local(url, id):
         print(e)
         return None
 
+# We need an access_token from Twitch for api calls on igdb.com
+setting.access_token = get_twitch_access_token()
 
+if setting.access_token is None:
+    exit()
+
+# Using igdb.com api to fetch cover images for every game in the database
 games = get_all_games_from_db()
-
 for game in games:
     game_id = search_game_id(game['game_name'])
     if(game_id is not None):
@@ -102,5 +108,15 @@ for game in games:
         if(cover_url is not None):
             save_image_local(cover_url, game['id'])
 
-
-
+# Updates all covers in the database by id
+conn = sqlite3.connect('./database/test.db')
+cursor = conn.cursor()
+for i in range(1, len(games)):
+    try:
+        with open('./public/images/game_images/game_image_' + str(i) + '.jpg', "r") as outfile:
+            sqlite_select_query = f"""UPDATE Game SET COVER = "game_image_{i}.jpg" WHERE id = {i}"""
+            cursor.execute(sqlite_select_query)
+            conn.commit()
+    except Exception as e:
+        print(f"found {i}")
+        continue
