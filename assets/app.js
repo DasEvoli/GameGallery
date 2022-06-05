@@ -17,10 +17,12 @@ import './bootstrap';
 import { createApp } from 'vue';
 import App from "./App.vue";
 
-import GameGallery from "./components/GameGallery.vue"
+import Gallery from "./components/Gallery.vue"
+import GameThumbnail from "./components/GameThumbnail.vue"
 import ControlWindow from "./components/ControlWindow.vue"
 
 const app = createApp(App);
-app.component('GameGallery', GameGallery);
+app.component('Gallery', Gallery);
+app.component('GameThumbnail', GameThumbnail);
 app.component('ControlWindow', ControlWindow);
 app.mount('#app');

@@ -28,6 +28,7 @@ class GamesController extends AbstractController
             $score = $record->getScore();
             $video_url = $record->getVideoUrl();
             $speedrun = $record->isSpeedrun();
+            $cover = $record->getCover();
 
             $obj =  [
                         'id' => $id,
@@ -38,7 +39,8 @@ class GamesController extends AbstractController
                         'time' => $time,
                         'score' => $score,
                         'video_url' => $video_url,
-                        'speedrun' => $speedrun
+                        'speedrun' => $speedrun,
+                        'cover' => $cover
                     ];
 
             array_push($json_arr, $obj);

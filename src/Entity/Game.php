@@ -37,6 +37,9 @@ class Game
     #[ORM\Column(type: 'boolean', nullable: true)]
     private $speedrun;
 
+    #[ORM\Column(type: 'string', length: 255, nullable: true)]
+    private $cover;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -134,6 +137,18 @@ class Game
     public function setSpeedrun(?bool $speedrun): self
     {
         $this->speedrun = $speedrun;
+
+        return $this;
+    }
+
+    public function getCover(): ?string
+    {
+        return $this->cover;
+    }
+
+    public function setCover(?string $cover): self
+    {
+        $this->cover = $cover;
 
         return $this;
     }
