@@ -33,7 +33,7 @@ class Upcoming(Base):
     id = Column('id', Integer, primary_key=True, autoincrement=True)
     game_name = Column('game_name', String)
 
-engine = create_engine('sqlite:///' + os.path.dirname(__file__) + '/database/test.db', echo=True, future=True)
+engine = create_engine('sqlite:///' + os.path.dirname(__file__) + '/database/data.db', echo=True, future=True)
 if len(Base.metadata.tables) < 1: Base.metadata.create_all(bind=engine)
 Session = sessionmaker(bind=engine)
 
@@ -70,7 +70,7 @@ def write_csv_challenges_to_db():
         session.close()
 
 def delete_all_upcoming_from_db():
-    conn = sqlite3.connect('./database/test.db')
+    conn = sqlite3.connect('./database/data.db')
     cursor = conn.cursor()
     sqlite_query = f"""DELETE FROM Upcoming"""
     cursor.execute(sqlite_query)

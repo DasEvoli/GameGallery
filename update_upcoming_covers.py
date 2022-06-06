@@ -18,7 +18,7 @@ def get_twitch_access_token():
 
 def get_all_games_from_db():
     games_tmp = []
-    conn = sqlite3.connect('C:/Users/vinze/Documents/Programming/Repositories/symfony_vue_project/database/test.db')
+    conn = sqlite3.connect('C:/Users/vinze/Documents/Programming/Repositories/symfony_vue_project/database/data.db')
     cursor = conn.cursor()
     sqlite_select_query = """SELECT * from Upcoming"""
     cursor.execute(sqlite_select_query)
@@ -89,7 +89,7 @@ def save_image_local(url, id):
         return None
 
 def update_upcoming_covers_in_db(games):
-    conn = sqlite3.connect('./database/test.db')
+    conn = sqlite3.connect('./database/data.db')
     cursor = conn.cursor()
     for i in range(1, len(games)+1):
         try:
