@@ -88,6 +88,20 @@ def save_image_local(url, id):
         print(e)
         return None
 
+def update_upcoming_covers_in_db(games):
+    conn = sqlite3.connect('./database/test.db')
+    cursor = conn.cursor()
+    for i in range(1, len(games)+1):
+        try:
+            # TODO: not entirely sure what I'm doing here
+            with open('./public/images/game_images/game_image_upcoming_' + str(i) + '.jpg', "r") as outfile:
+                sqlite_select_query = f"""UPDATE Upcoming SET COVER = "game_image_upcoming_{i}.jpg" WHERE id = {i}"""
+                cursor.execute(sqlite_select_query)
+                conn.commit()
+                print(f"Wrote id:{i} in database cover column")
+        except Exception as e:
+            print(f"Did not find image with id:{i}")
+            continue
 # We need an access_token from Twitch for api calls on igdb.com
 setting.access_token = get_twitch_access_token()
 
@@ -102,17 +116,5 @@ for game in games:
         cover_url = search_game_cover(game_id)
         if(cover_url is not None):
             save_image_local(cover_url, game['id'])
+update_upcoming_covers_in_db(games)
 
-# Updates all covers in the database by id
-conn = sqlite3.connect('./database/test.db')
-cursor = conn.cursor()
-for i in range(1, len(games)+1):
-    try:
-        with open('./public/images/game_image_upcoming_' + str(i) + '.jpg', "r") as outfile:
-            sqlite_select_query = f"""UPDATE Upcoming SET COVER = "game_image_upcoming_{i}.jpg" WHERE id = {i}"""
-            cursor.execute(sqlite_select_query)
-            conn.commit()
-            print(f"Wrote id:{i} in database cover column")
-    except Exception as e:
-        print(f"Did not find image with id:{i}")
-        continue
