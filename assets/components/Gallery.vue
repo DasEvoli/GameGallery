@@ -1,6 +1,6 @@
 <template>
     <div v-if="data.length > 0" class="gallery">
-        <div v-for="item in data" class="item" :key="item">
+        <div v-for="item in data" class="game-item" :key="item">
             <GameThumbnail :game="item"></GameThumbnail>
         </div>
     </div>
@@ -32,7 +32,7 @@
     justify-content: center;
 }
 
-.item {
+.game-item {
     margin-bottom: 0.4rem;
     width: 12rem;
     position: relative;

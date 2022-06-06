@@ -1,6 +1,6 @@
 <template>
-    <span class="ranking">{{game.score}}</span>
-    <img :src="getCoverImage()"/>
+    <span class="ranking">{{getScore()}}</span>
+    <a :href="game.video_url"><img :src="getCoverImage()"/></a>
     <div class="game-info">
         <p class="console">{{game.console_name}}</p>
         <p class="title">{{game.game_name}}</p>
@@ -8,12 +8,7 @@
     </div>
 </template>
 <script>
-    export default {
-        //data() {
-            //return {
-                //game: null
-            //}
-        //},        
+    export default {     
         props: ['game'],
         computed: {
         },
@@ -23,6 +18,12 @@
                     return "images/game_images/no_cover.jpg"
                 }
                 else return "images/game_images/" + this.game.cover
+            },
+            getScore(){
+                if(this.game.score == null){
+                    return 0
+                }
+                else return this.game.score
             }
         }
     }
@@ -45,15 +46,17 @@ img {
 .ranking {
     position: absolute;
     font-size: 2rem;
-    background-color: #e3e3e3;
-    width: 2rem;
-    height: 2rem;
+    background-color: black;
+    color: white;
+    font-weight: bold;
+    width: 1rem;
+    height: 1rem;
     display: flex;
     border-radius: 20%;
     text-align: center;
     justify-content: center;
     align-items: center;
-    padding: 2rem;
+    padding: 1.5rem;
     left: 80%;
     top: -3%;
 }

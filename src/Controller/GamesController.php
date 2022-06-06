@@ -48,4 +48,26 @@ class GamesController extends AbstractController
 
         return new JsonResponse(json_encode($json_arr));
     }
+
+    #[Route('/upcoming')]
+    public function upcoming(ManagerRegistry $doctrine): Response
+    {
+        $json_arr = [];
+
+        $records = $doctrine->getRepository("App\Entity\Upcoming")->findAll();
+        foreach($records as $record){
+            
+            $id = $record->getId();
+            $game_name = $record->getGameName();
+            $cover = $record->getCover();
+            $obj =  [
+                'id' => $id,
+                'game_name' => $game_name,
+                'cover' => $cover
+            ];
+            array_push($json_arr, $obj);
+        }
+
+        return new JsonResponse(json_encode($json_arr));
+    }
 }

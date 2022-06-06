@@ -3,7 +3,7 @@ import sqlite3
 import json
 import urllib.request
 import time
-import os.path
+import os
 import setting as setting
 
 
@@ -36,7 +36,7 @@ def search_game_cover(game_id):
     try:
         headers = {
             'Client-ID': setting.client_id,
-            'Authorization': f'Bearer {access_token}',
+            'Authorization': f'Bearer {setting.access_token}',
             'Accept': 'application/json',
         }
         r = requests.post('https://api.igdb.com/v4/covers', data='fields *; where game = ' + str(game_id) + ';', headers=headers)
@@ -60,7 +60,7 @@ def search_game_id(search_string):
     try:
         headers = {
             'Client-ID': setting.client_id,
-            'Authorization': f'Bearer {access_token}',
+            'Authorization': f'Bearer {setting.access_token}',
             'Accept': 'application/json',
         }
         r = requests.post('https://api.igdb.com/v4/games', data=f'search "{search_string}"; fields *;', headers=headers)
@@ -111,12 +111,12 @@ for game in games:
 # Updates all covers in the database by id
 conn = sqlite3.connect('./database/test.db')
 cursor = conn.cursor()
-for i in range(1, len(games)):
+for i in range(1, len(games)+1):
     try:
         with open('./public/images/game_images/game_image_' + str(i) + '.jpg', "r") as outfile:
             sqlite_select_query = f"""UPDATE Game SET COVER = "game_image_{i}.jpg" WHERE id = {i}"""
             cursor.execute(sqlite_select_query)
             conn.commit()
     except Exception as e:
-        print(f"found {i}")
+        print(f"Did not find image with id:{i}")
         continue

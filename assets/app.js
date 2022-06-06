@@ -20,9 +20,11 @@ import App from "./App.vue";
 import Gallery from "./components/Gallery.vue"
 import GameThumbnail from "./components/GameThumbnail.vue"
 import ControlWindow from "./components/ControlWindow.vue"
+import UpcomingContainer from "./components/UpcomingContainer.vue"
 
 const app = createApp(App);
 app.component('Gallery', Gallery);
 app.component('GameThumbnail', GameThumbnail);
 app.component('ControlWindow', ControlWindow);
+app.component('UpcomingContainer', UpcomingContainer);
 app.mount('#app');

@@ -1,9 +1,9 @@
-
 import csv
 import sqlite3
 from sqlalchemy import create_engine, Column, Integer, String, Boolean, ForeignKey
 from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy.orm import sessionmaker, relationship
+import os
 
 Base = declarative_base()
 class Game(Base):
@@ -19,13 +19,14 @@ class Game(Base):
     score = Column('score', Integer)
     video_url = Column('video_url', String)
     speedrun = Column('speedrun', Boolean)
+    cover = Column('cover', String)
 
-engine = create_engine('sqlite:///' + dirname(__FILE__) + '/database/test.db', echo=True, future=True)
+engine = create_engine('sqlite:///' + os.path.dirname(__file__) + '/database/test.db', echo=True, future=True)
 if len(Base.metadata.tables) < 1: Base.metadata.create_all(bind=engine)
 Session = sessionmaker(bind=engine)
 
 offset = 2
-with open(dirname(__FILE__) + '/assets/csv/challenge_list.csv', encoding="utf8") as csvfile:
+with open(os.path.dirname(__file__) + '/assets/csv/challenge_list.csv', encoding="utf8") as csvfile:
     r = csv.reader(csvfile, delimiter=',')
     session = Session()
     for row in r:
@@ -49,6 +50,7 @@ with open(dirname(__FILE__) + '/assets/csv/challenge_list.csv', encoding="utf8")
             e.video_url = row[7]
         if row[8]:
             e.speedrun = True
+        e.cover = None
         if e.game_name:
             session.add(e)
     session.commit()
