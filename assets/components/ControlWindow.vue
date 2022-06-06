@@ -1,26 +1,25 @@
 <template>
-    <div class="container">
-        <div class="control-container">
-            <h2>Sort by:</h2>
+    <div class="control-container">
+        <div class="control-element">
             <div class="control-buttons">
                 <label>Score</label>
-                <button @click="sortByScore(true)" class="btn btn-primary">10 ... 0</button>
-                <button @click="sortByScore(false)" class="btn btn-primary">0 ... 10</button>
+                <button @click="sortByScore(true)" class="btn btn-primary">10 ➝ 0</button>
+                <button @click="sortByScore(false)" class="btn btn-primary">0 ➝ 10</button>
             </div>
             <div class="control-buttons">
                 <label>Name</label>
-                <button @click="sortByScore()" class="btn btn-primary">A ... Z</button>
-                <button @click="sortByScore()" class="btn btn-primary">Z ... A</button>
+                <button @click="sortByName(false)" class="btn btn-primary">A ➝ Z</button>
+                <button @click="sortByName(true)" class="btn btn-primary">Z ➝ A</button>
             </div>
         </div>
-        <div class="control-container">
-            <label>Only played:</label>
-            <input id="playedOnly" type="checkbox" @click="filterGamelist()"/>
+        <div class="control-element">
+            <label>Only scored:</label>
+            <input id="scoredOnly" type="checkbox" @click="filterGamelist()"/>
         </div>        
-        <div class="control-container">
+        <div class="control-element">
             <label>Console:</label>
-            <input @change="filterGamelist()" class="form-control" list="datalistOptions" id="consoleOptionList" placeholder="Type to search...">
-                <datalist id="datalistOptions">
+            <input @change="filterGamelist()" class="form-control" list="consoleListOptions" id="consoleOptionList" placeholder="Search console">
+                <datalist id="consoleListOptions">
                     <option value="3DS Downloads"/>
                     <option value="Amiga"/>
                     <option value="Amiga CD32"/>
@@ -64,41 +63,85 @@
                     <option value="XBOX"/>
                 </datalist>
         </div>
-
+        <div class="control-element">
+            <label>Search:</label>
+            <input type="text" v-model="gameSearchValue" @keyup="filterGamelist()" class="form-control" placeholder="Search game">
+        </div>
     </div>
 </template>
 
 <script>
     export default{
+        
+        data(){
+            return {
+                gameSearchValue: ""
+            }
+        },
+        
         methods: {
-            filterGamelist(){
+
+            filterGamelist(filterString = this.gameSearchValue){
                 let consoleValue = document.getElementById('consoleOptionList').value;
-                let onlyPlayedIsChecked = document.getElementById("playedOnly").checked;
+                let onlyScoredIsChecked = document.getElementById("scoredOnly").checked;
                 let list = document.getElementById('game-gallery').children;
                 list = Array.prototype.slice.call(list, 0);
+
                 list.forEach(element => {
                     element.style["display"] = "block"
-                    if(element.getElementsByClassName('console')[0].innerHTML == consoleValue || consoleValue == ""){
-                        if(onlyPlayedIsChecked){
-                            if(element.getElementsByClassName('ranking')[0].innerHTML == 0){
-                                element.style["display"] = "none"
-                                return
-                            }
-                        }
-                    }
-                    else {
+                    
+                    if(element.getElementsByClassName('console')[0].innerHTML != consoleValue && consoleValue != ""){
                         element.style["display"] = "none"
                         return
                     }
+                    if(onlyScoredIsChecked){
+                        if(element.getElementsByClassName('ranking').length <= 0){
+                            element.style["display"] = "none"
+                            return
+                        }
+                    }
+                    if(filterString != ""){
+                        console.log(filterString)
+                        if(!String(element.getElementsByClassName('title')[0].innerHTML).toLowerCase().includes(filterString.toLowerCase())){
+                            element.style["display"] = "none"
+                            return
+                        }
+                    }
+
                 });
             },
 
             sortByScore(descending){
                 let list = document.getElementById('game-gallery').children;
                 list = Array.prototype.slice.call(list, 0);
-                if(descending) list.sort((a, b) => parseInt(a.getElementsByClassName('ranking')[0].innerHTML) < parseInt(b.getElementsByClassName('ranking')[0].innerHTML) ? 1 : -1)
-                else list.sort((a, b) => parseInt(a.getElementsByClassName('ranking')[0].innerHTML) > parseInt(b.getElementsByClassName('ranking')[0].innerHTML) ? 1 : -1)
+
+                list.sort((a, b) => {
+                    let aValue;
+                    let bValue;
+
+                    if(a.getElementsByClassName('ranking').length <= 0) aValue = 0;
+                    else aValue = parseInt(a.getElementsByClassName('ranking')[0].innerHTML)
+                    if(b.getElementsByClassName('ranking').length <= 0) bValue = 0;
+                    else bValue = parseInt(b.getElementsByClassName('ranking')[0].innerHTML)
+
+                    if(descending) return aValue < bValue ? 1 : -1
+                    else return aValue > bValue ? 1 : -1
+                })
                 
+                let parent = document.getElementById('game-gallery');
+                parent.innerHTML = "";
+                for(var i = 0; i < list.length; i++) {
+                    parent.appendChild(list[i]);
+                }
+            },
+
+            sortByName(descending){
+                let list = document.getElementById('game-gallery').children;
+                list = Array.prototype.slice.call(list, 0);
+                console.log(list[0].getElementsByClassName('title')[0].innerHTML)
+                if(descending) list.sort((a,b) => a.getElementsByClassName('title')[0].innerHTML < b.getElementsByClassName('title')[0].innerHTML ? 1 : -1)
+                else list.sort((a,b) => a.getElementsByClassName('title')[0].innerHTML > b.getElementsByClassName('title')[0].innerHTML ? 1 : -1)
+
                 let parent = document.getElementById('game-gallery');
                 parent.innerHTML = "";
                 for(var i = 0; i < list.length; i++) {
@@ -110,18 +153,37 @@
 </script>
 
 <style scoped>
-    .container {
-        background-color: #008eff69;
-        width: 100%;
-        height: 100%;
-    }
-    
+
     label {
-        font-size: 1.5rem;
+        font-size: 1.2rem;
         margin-right: 1rem;
+        vertical-align: middle;
     }
     
     .btn {
         margin-right: 1rem
     }
+
+    .control-container {
+        display: flex;
+        justify-content: center;
+    }
+
+    .control-element {
+        display: flex;
+        margin-left: 1rem;
+        padding-left: 1rem;
+        align-items: center;
+        border-left: 2px solid var(--light-blue);
+    }
+
+@media only screen and (max-width: 768px) {
+    .control-container {
+        flex-wrap: wrap;
+        justify-content: unset;
+    }
+    .control-element {
+        padding-top: 1rem;
+    }
+}
 </style>

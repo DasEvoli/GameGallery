@@ -1,5 +1,88 @@
 @import "~/node_modules/bootstrap/dist/css/bootstrap.css";
 
+:root {
+    --black: rgb(39, 39, 39);
+    --dark-blue: #0c162a;
+    --lighter-blue: #1d2e43;
+    --light-blue: #3f597c;
+    --white: rgb(235, 235, 235);
+  }
+
+/* width */
+::-webkit-scrollbar {
+  width: 7px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  background: #7288a3;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: var(--lighter-blue);
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  background: #555;
+}
+
+a {
+  text-decoration: none;
+  color: white;
+}
+
+a:hover{
+  font-weight: bold;
+  text-decoration: underline;
+  color: white;
+}
+
+.btn-primary {
+    background-color: #354b6a;
+    border: none;
+}
+
+.btn-primary:hover {
+    background-color: #526e95;
+    border-color: unset;
+}
+
+.form-control {
+    color: #dddddd;
+    background-color: #3f597c96;
+    border: 1px solid var(--lighter-blue);
+}
+
+.form-control:focus {
+    color: #dddddd;
+    background-color: #3f597c96;
+    border-color: #b6c2d3;
+    box-shadow: unset;
+}
+
+.form-control::placeholder {
+    color: #c4c4c4; 
+}
+
 html {
     font-size: 12px;
 }
+
+body {
+    color: var(--white);
+    background-color: var(--dark-blue);
+    font-family: 'Ubuntu', sans-serif;
+}
+
+hr {
+    height: 2px !important;
+    color: var(--lighter-blue);
+    opacity: 100%;
+}
+
+.container {
+    margin-top: 1rem;
+}
+

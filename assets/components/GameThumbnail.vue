@@ -1,10 +1,10 @@
 <template>
-    <span class="ranking">{{getScore()}}</span>
+    <span v-if="game.score" class="ranking">{{getScore()}}</span>
     <a :href="game.video_url"><img :src="getCoverImage()"/></a>
     <div class="game-info">
-        <p class="console">{{game.console_name}}</p>
-        <p class="title">{{game.game_name}}</p>
-        <p class="time">{{game.time}}</p>
+        <p v-if="game.console_name" class="console">{{game.console_name}}</p>
+        <p v-if="game.game_name" class="title">{{game.game_name}}</p>
+        <p v-if="game.time" class="time">{{game.time}}</p>
     </div>
 </template>
 <script>
@@ -37,17 +37,22 @@ img {
     border-radius: 0.7rem 0.7rem 0rem 0rem;
 }
 
+.game-info {
+    margin: 0.5rem 0rem;
+}
+
 .game-info p {
     overflow-wrap: break-word;
-    margin-bottom: 0;
     text-align: center;
+    margin-bottom: 0rem;
 }
 
 .ranking {
     position: absolute;
     font-size: 2rem;
-    background-color: black;
-    color: white;
+    background-color: var(--light-blue);
+    color: var(--white);
+    border: 2px solid var(--dark-blue);
     font-weight: bold;
     width: 1rem;
     height: 1rem;

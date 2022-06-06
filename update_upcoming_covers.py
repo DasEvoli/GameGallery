@@ -108,7 +108,7 @@ conn = sqlite3.connect('./database/test.db')
 cursor = conn.cursor()
 for i in range(1, len(games)+1):
     try:
-        with open('./public/images/upcoming_images/game_image_upcoming_' + str(i) + '.jpg', "r") as outfile:
+        with open('./public/images/game_image_upcoming_' + str(i) + '.jpg', "r") as outfile:
             sqlite_select_query = f"""UPDATE Upcoming SET COVER = "game_image_upcoming_{i}.jpg" WHERE id = {i}"""
             cursor.execute(sqlite_select_query)
             conn.commit()
