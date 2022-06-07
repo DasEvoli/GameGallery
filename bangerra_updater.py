@@ -9,6 +9,7 @@ import csv
 from sqlalchemy import create_engine, Column, Integer, String, Boolean, ForeignKey
 from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy.orm import sessionmaker, relationship
+import update_covers_in_db
 
 
 Base = declarative_base()
@@ -17,8 +18,8 @@ class Game(Base):
 
     id = Column('id', Integer, primary_key=True)
 
-    console_name = Column('console_name', String)
     game_name = Column('game_name', String)
+    console_name = Column('console_name', String)
     collection_name = Column('collection_name', String)
     genre = Column('genre', String)
     time = Column('time', String)
@@ -68,13 +69,16 @@ def write_csv_challenges_to_db():
                 session.add(e)
         session.commit()
         session.close()
+        print("Finished writing challenge_list.csv to database")
 
-def delete_all_upcoming_from_db():
+def delete_all_from_db(table):
     conn = sqlite3.connect('./database/data.db')
     cursor = conn.cursor()
-    sqlite_query = f"""DELETE FROM Upcoming"""
+    sqlite_query = f"""DELETE FROM {table}"""
     cursor.execute(sqlite_query)
     conn.commit()
+    print("Deleted all records of table: " + table)
+
 def write_csv_upcoming_to_db():
     offset = 5
     with open(os.path.dirname(__file__) + '/assets/csv/upcoming_list.csv', encoding="utf8") as csvfile:
@@ -89,7 +93,12 @@ def write_csv_upcoming_to_db():
             else: break
         session.commit()
         session.close()
+        print("Finished writing upcoming_list.csv to database")
 
+delete_all_from_db('Game')
 write_csv_challenges_to_db()
-delete_all_upcoming_from_db()
+delete_all_from_db('Upcoming')
 write_csv_upcoming_to_db()
+
+update_covers_in_db.process('Game', './public/images/game_images/', 'game_image')
+update_covers_in_db.process('Upcoming', './public/images/game_images/', 'game_image_upcoming_')

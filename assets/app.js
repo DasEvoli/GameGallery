@@ -20,9 +20,12 @@ import App from "./App.vue";
 import GameThumbnail from "./components/GameThumbnail.vue"
 import ControlWindow from "./components/ControlWindow.vue"
 import Footer from "./components/Footer.vue"
+import BarChart from "./components/BarChart.vue"
+
 
 const app = createApp(App);
 app.component('GameThumbnail', GameThumbnail);
 app.component('ControlWindow', ControlWindow);
 app.component('Footer', Footer);
+app.component('BarChart', BarChart);
 app.mount('#app');

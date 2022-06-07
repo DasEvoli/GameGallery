@@ -10,8 +10,6 @@
 <script>
     export default {     
         props: ['game'],
-        computed: {
-        },
         methods: {
             getCoverImage(){
                 if(this.game.cover == null){
