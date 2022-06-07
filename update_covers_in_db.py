@@ -20,7 +20,7 @@ def get_twitch_access_token():
 def get_all_games_from_db(table:str):
     print("Getting all games saved in table: " + table)
     games_tmp = []
-    conn = sqlite3.connect('C:/Users/vinze/Documents/Programming/Repositories/symfony_vue_project/database/data.db')
+    conn = sqlite3.connect('./database/data.db') #TODO:
     cursor = conn.cursor()
     sqlite_select_query = f"""SELECT * from {table}"""
     cursor.execute(sqlite_select_query)

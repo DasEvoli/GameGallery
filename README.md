@@ -1,4 +1,4 @@
-# Game Gallery via CSV File
+# Game Gallery
 This project was created to get familiar with PHP 8.0, Symfony 6 and Vue3.js. The data I used is from Bangerra, a youtuber/twitch streamer who has his own challenge of playing all games he owns. He keeps track of them via a CSV file. I simply use this data from the CSV file and display it nicely.
 
 The python scripts I provide do need to use the Schema of the database I use. Gamelist is the entire game list and 'Upcoming' is from another CSV file where certain games are mentioned that will be played next.
