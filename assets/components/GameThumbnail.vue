@@ -12,15 +12,11 @@
         props: ['game'],
         methods: {
             getCoverImage(){
-                if(this.game.cover == null){
-                    return "images/game_images/no_cover.jpg"
-                }
+                if(this.game.cover == null) return "images/game_images/no_cover.jpg"
                 else return "images/game_images/" + this.game.cover
             },
             getScore(){
-                if(this.game.score == null){
-                    return 0
-                }
+                if(this.game.score == null) return 0
                 else return this.game.score
             }
         }

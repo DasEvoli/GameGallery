@@ -1,5 +1,5 @@
 <template>
-    <div class="control-container">
+    <div class="container" style="display: flex; justify-content: center;">
         <div class="control-element">
             <div class="control-buttons">
                 <label>Score</label>
@@ -110,7 +110,6 @@
 
                 });
             },
-
             sortByScore(descending){
                 let list = document.getElementById('game-gallery').children;
                 list = Array.prototype.slice.call(list, 0);
@@ -134,11 +133,10 @@
                     parent.appendChild(list[i]);
                 }
             },
-
             sortByName(descending){
                 let list = document.getElementById('game-gallery').children;
                 list = Array.prototype.slice.call(list, 0);
-                console.log(list[0].getElementsByClassName('title')[0].innerHTML)
+
                 if(descending) list.sort((a,b) => a.getElementsByClassName('title')[0].innerHTML < b.getElementsByClassName('title')[0].innerHTML ? 1 : -1)
                 else list.sort((a,b) => a.getElementsByClassName('title')[0].innerHTML > b.getElementsByClassName('title')[0].innerHTML ? 1 : -1)
 
@@ -162,11 +160,6 @@
     
     .btn {
         margin-right: 1rem
-    }
-
-    .control-container {
-        display: flex;
-        justify-content: center;
     }
 
     .control-element {
