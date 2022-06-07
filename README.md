@@ -8,7 +8,7 @@ The script called 'bangerra' is basically useless because it is just for my case
 ##  Database Schema:
 
 Table: Game  
-id (int), console_name (string), game_name(string), collection_name(string), genre(string), time(string), score(int), video_url(string), speedrun(bool) cover(string)
+id (int), game_name(string), console_name (string) collection_name(string), genre(string), time(string), score(int), video_url(string), speedrun(bool) cover(string)
 
 Table: Upcoming  
 id (int), game_name (string), cover (string)
