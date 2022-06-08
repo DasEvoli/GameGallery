@@ -7,7 +7,7 @@ use Symfony\Component\Routing\Annotation\Route;
 use Doctrine\Persistence\ManagerRegistry;
 use Symfony\Component\HttpFoundation\JsonResponse;
 
-#[Route('/gamelist')]
+#[Route('/api/gamelist')]
 class GamesController extends AbstractController
 {
     #[Route('/challenges')]

@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "e5972b6abe8b62ec79074d18a51aa85f",
+    "content-hash": "324b4a847536468465476283e5baf0d3",
     "packages": [
         {
             "name": "doctrine/annotations",
@@ -2263,6 +2263,32 @@
             "time": "2022-01-14T11:51:13+00:00"
         },
         {
+            "name": "symfony/apache-pack",
+            "version": "v1.0.1",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/symfony/apache-pack.git",
+                "reference": "3aa5818d73ad2551281fc58a75afd9ca82622e6c"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/symfony/apache-pack/zipball/3aa5818d73ad2551281fc58a75afd9ca82622e6c",
+                "reference": "3aa5818d73ad2551281fc58a75afd9ca82622e6c",
+                "shasum": ""
+            },
+            "type": "symfony-pack",
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "description": "A pack for Apache support in Symfony",
+            "support": {
+                "issues": "https://github.com/symfony/apache-pack/issues",
+                "source": "https://github.com/symfony/apache-pack/tree/master"
+            },
+            "time": "2017-12-12T01:46:35+00:00"
+        },
+        {
             "name": "symfony/asset",
             "version": "v6.1.0",
             "source": {
@@ -3449,16 +3475,16 @@
         },
         {
             "name": "symfony/flex",
-            "version": "v2.2.0",
+            "version": "v2.2.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/flex.git",
-                "reference": "f15c99ec98b5b31ae862035c51741294708211f2"
+                "reference": "581a978fbcc878a3fef24c9560ac4df3720101a3"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/flex/zipball/f15c99ec98b5b31ae862035c51741294708211f2",
-                "reference": "f15c99ec98b5b31ae862035c51741294708211f2",
+                "url": "https://api.github.com/repos/symfony/flex/zipball/581a978fbcc878a3fef24c9560ac4df3720101a3",
+                "reference": "581a978fbcc878a3fef24c9560ac4df3720101a3",
                 "shasum": ""
             },
             "require": {
@@ -3494,7 +3520,7 @@
             "description": "Composer plugin for Symfony",
             "support": {
                 "issues": "https://github.com/symfony/flex/issues",
-                "source": "https://github.com/symfony/flex/tree/v2.2.0"
+                "source": "https://github.com/symfony/flex/tree/v2.2.1"
             },
             "funding": [
                 {
@@ -3510,7 +3536,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2022-06-03T08:42:12+00:00"
+            "time": "2022-06-06T15:53:14+00:00"
         },
         {
             "name": "symfony/form",

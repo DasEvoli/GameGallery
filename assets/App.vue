@@ -37,8 +37,8 @@ export default {
         }
     },
     async mounted(){
-        this.fetchGamelist('http://localhost:8000/gamelist/challenges')
-        this.fetchUpcoming('http://localhost:8000/gamelist/upcoming') 
+        this.fetchGamelist('./api/gamelist/challenges')
+        this.fetchUpcoming('./api/gamelist/upcoming') 
     },
 
     computed: {
