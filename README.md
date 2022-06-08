@@ -21,6 +21,10 @@ id (int), game_name (string), cover (string)
 * Composer >=2.1
 * sqlite3 database in Database directory and update .env accordingly
 
+# Setup
+* Delelete 'your_' from files
+* Add sqlite3 database to /database with the Schema from above
+
 ## Authors
 ![Image of DasEvoli](https://i.imgur.com/xNcLWUT.png) DasEvoli (Vinzenz Wetzel)
 
