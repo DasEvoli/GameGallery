@@ -6,6 +6,7 @@ import time
 import os
 import setting as setting
 
+
 # We need an access_token to access the api on igdb.com (Game Database)
 def get_twitch_access_token():
     try:
@@ -20,7 +21,7 @@ def get_twitch_access_token():
 def get_all_games_from_db(table:str):
     print("Getting all games saved in table: " + table)
     games_tmp = []
-    conn = sqlite3.connect('./database/data.db') #TODO:
+    conn = sqlite3.connect('./database/data.db')
     cursor = conn.cursor()
     sqlite_select_query = f"""SELECT * from {table}"""
     cursor.execute(sqlite_select_query)
