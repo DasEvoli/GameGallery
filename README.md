@@ -3,7 +3,7 @@ This project was created to get familiar with PHP 8.0, Symfony 6 and Vue3.js. Th
 
 The python scripts I provide do need to use the Schema of the database I use. Gamelist is the entire game list and 'Upcoming' is from another CSV file where certain games are mentioned that will be played next.
 Also one script fetches all thumbnails for every game record by searching its name in the database provided by the api from https://www.igdb.com/
-The script called 'bangerra' is basically useless because it is just for my case and fetches the data from the CSV he provides.
+The script called 'bangerra' is basically useless because it is just for my case and fetches the data from the CSV he provides. You can obviously adjust it for your need.
 
 ##  Database Schema:
 
@@ -19,10 +19,10 @@ id (int), game_name (string), cover (string)
 * Symfony 6.0
 * npm
 * Composer >=2.1
-* sqlite3 database in Database directory and update .env accordingly
+* sqlalchemy
 
 # Setup
-* Delelete 'your_' from files
+* Delete 'your_' from files
 * Add sqlite3 database to /database with the Schema from above
 
 ## Authors
